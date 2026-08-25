@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="box m-5">
+    <p class="is-size-1 has-text-weight-extrabold">옷 등록</p>
+    <hr />
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="clothpic" class="label">옷 사진 선택</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="control">
+                        <input id="clothpic" class="input" type="file" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="brand" class="label">브랜드</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="control">
+                        <input id="brand" class="input" type="text" placeholder="브랜드명 입력 (예시: 나이키)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="buydate" class="label">구매한 날짜</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="control">
+                        <input id="buydate" class="input" type="date" min="2000-1-1" max="2999-12-31" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="buymethod" class="label">구매한 장소</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="control">
+                        <input id="buymethod" class="input" type="text" placeholder="어디서 샀는지 (예시: 무신사)" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="price" class="label">옷 가격</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="control">
+                        <input id="price" class="input" type="number" placeholder="천원 단위" step="1000" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="season" class="label">시즌</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="select" id="season">
+                        <select>
+                            <option>SS</option>
+                            <option>FW</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label id="clothtype" class="label">종류</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="select" id="clothtype">
+                        <select>
+                            <option>상의</option>
+                            <option>하의</option>
+                            <option>외투</option>
+                            <option>신발</option>
+                            <option>액세서리</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="field">
+        <div class="columns">
+            <div class="column is-narrow" style="width: 150px">
+                <div class="field">
+                    <label for="clothsize" class="label">사이즈</label>
+                </div>
+            </div>
+            <div class="column is-3">
+                <div class="field">
+                    <div class="select" id="clothsize">
+                        <select>
+                            <option>XS</option>
+                            <option>S</option>
+                            <option>M</option>
+                            <option>L</option>
+                            <option>XL</option>
+                            <option>XXL 이상 (프리사이즈 포함)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <button class="button is-primary" onclick="register()">등록하기</button>
+</div>
+<script>
+    function register() {
+        let brand = $("#brand").val();
+        let buydate = $("#buydate").val();
+        let buymethod = $("#buymethod").val();
+        let price = $("#price").val();
+        let season = $("#season").val();
+        let clothtype = $("#clothtype").val();
+        let clothsize = $("#clothsize").val();
+
+        $.ajax({
+            type: "POST",
+            url: "/register",
+            data: {
+                "brand": brand, "date": buydate, "method": buymethod, "price": price,
+                "season": season, "type": clothtype, "size": clothsize
+            },
+            success: function (response) {
+                alert("일단 등록되었습니다");
+            }
+        });
+    }
+</script>
+{% endblock %}
