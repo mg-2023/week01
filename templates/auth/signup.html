@@ -82,7 +82,7 @@
         console.log(ID);
         $.ajax({
             method: "GET",
-            url: `/check-id-unique?id=${ID}`,
+            url: `/auth/check-id?id=${ID}`,
             data: {},
             success: function(response) {
                 alert(response["message"]);
@@ -99,7 +99,7 @@
         console.log(nick);
         $.ajax({
             method: "GET",
-            url: `/check-nick-unique?nick=${nick}`,
+            url: `/auth/check-nickname?nick=${nick}`,
             data: {},
             success: function(response) {
                 alert(response["message"]);
@@ -128,7 +128,7 @@
             else {
                 $.ajax({
                     method: "POST",
-                    url: "/proceed-signup",
+                    url: "/auth/signup",
                     data: { "final_id": id, "final_pw": pw, "final_nick": nick },
                     success: function(response) {
                         alert(response["message"]);

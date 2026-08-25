@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<p class="is-size-1">Hello world</p>
+<button class="button is-danger" id="logout" onclick="proceedLogout()">테스트용 로그아웃 버튼</button>
+<script>
+    function proceedLogout() {
+        $.ajax({
+            method: 'GET',
+            url: '/auth/logout',
+            data: {},
+            success: function(response) {
+                alert("로그아웃 되었습니다.");
+                window.location.href = "/";
+            }
+        });
+    }
+</script>
+{% endblock %}

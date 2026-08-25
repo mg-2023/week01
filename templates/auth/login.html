@@ -8,13 +8,13 @@
         <div class="columns">
             <div class="column is-narrow" style="width: 150px">
                 <div class="field">
-                    <label class="label">아이디</label>
+                    <label for="input-id" class="label">아이디</label>
                 </div>
             </div>
             <div class="column is-3">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="text" />
+                        <input id="input-id" class="input" type="text" />
                     </div>
                 </div>
             </div>
@@ -25,25 +25,41 @@
         <div class="columns">
             <div class="column is-narrow" style="width: 150px">
                 <div class="field">
-                    <label class="label">비밀번호</label>
+                    <label for="input-pw" class="label">비밀번호</label>
                 </div>
             </div>
             <div class="column is-3">
                 <div class="field">
                     <div class="control">
-                        <input class="input" type="password" />
+                        <input id="input-pw" class="input" type="password" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <button class="button is-primary mb-4">로그인</button>
+    <button class="button is-primary mb-4" onclick="proceedLogin()">로그인</button>
     <p>
-        <a href="/auth/signup"><u>아직 계정이 없으신가요? 회원가입</u></a>
+        <a href="/auth/signup-screen"><u>아직 계정이 없으신가요? 회원가입</u></a>
     </p>
 </div>
 <script>
+function proceedLogin() {
+    let id = $("#input-id").val();
+    let pw = $("#input-pw").val();
 
+    $.ajax({
+        method: "POST",
+        url: `/auth/login`,
+        data: { "userid": id, "userpw": pw },
+        success: function(response) {
+            alert(response["message"]);
+
+            if(response["status"] == "success") {
+                window.location.href = "/";
+            }
+        }
+    });
+}
 </script>
 {% endblock %}
