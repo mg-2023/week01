@@ -33,7 +33,7 @@
             contentType: false, //파일 전송 시 필수 설정
             success: function (response) {
                 alert("등록되었습니다.");
-                //window.location.href = "/closet";
+                window.location.href = "/closet";
             }
         });
     }
