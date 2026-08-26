@@ -6,15 +6,20 @@ from db import items
 from db import *
 
 closet_bp = Blueprint("closet", __name__)
-
+cloth_type_id = {'상의': 1, '하의': 2, '외투': 3, '신발': 4, '악세서리': 5}
 
 @closet_bp.route('/', methods=['GET'])
 def index():
+    button_ctrl = [False for _ in range(6)]
+    cloth_type = request.args.get('type')
     user = session['user_id']
-    closet_items = items.find({}, { '_id': 0 })
-    print(closet_items[0])
-    return render_template('closet/index.html', user=user, items=closet_items)
-
+    if cloth_type:
+        closet_items = items.find({'user_id': user, 'type': cloth_type})
+        button_ctrl[cloth_type_id.get(cloth_type)] = True
+    else:
+        closet_items = items.find({'user_id': user})
+        button_ctrl[0] = True
+    return render_template('closet/index.html', user=user, items=closet_items, btn_ctrl=button_ctrl)
 
 # 등록 API
 @closet_bp.route("/register", methods=["GET", "POST"])
@@ -32,6 +37,9 @@ def register_item():
         try:
             file = request.files["file"]
             item_id = create_closet_item(user_id, request.form, file)
+            return jsonify({"message": "성공적으로 등록되었습니다.", "item_id": item_id}), 201
+        except Exception as e:
+            return jsonify({"message": f"등록 실패: {str(e)}"}), 500
 
     return render_template("closet/register.html")
 
