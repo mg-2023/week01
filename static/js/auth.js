@@ -16,6 +16,18 @@ function proceedLogin() {
     });
 }
 
+function proceedLogout() {
+    $.ajax({
+        method: "GET",
+        url: "/auth/logout",
+        data: {},
+        success: function(response) {
+            alert("로그아웃 되었습니다.");
+            window.location.href = "/";
+        }
+    });
+}
+
 function checkIDisUnique() {
     let ID = $("#id-input").val();
     console.log(ID);

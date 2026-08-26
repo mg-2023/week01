@@ -6,3 +6,4 @@ mypage_bp = Blueprint("mypage", __name__)
 def mypage():
     user = session['user_id']
     return render_template('mypage/index.html', user=user)
+
