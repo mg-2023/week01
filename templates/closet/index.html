@@ -1,19 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<p class="is-size-1">Hello world</p>
-<button class="button is-danger" id="logout" onclick="proceedLogout()">테스트용 로그아웃 버튼</button>
-<script>
-    function proceedLogout() {
-        $.ajax({
-            method: 'GET',
-            url: '/auth/logout',
-            data: {},
-            success: function(response) {
-                alert("로그아웃 되었습니다.");
-                window.location.href = "/";
-            }
-        });
-    }
-</script>
+<div class="box m-5">
+    <div class="level">
+        <div class="level-left">
+            <p class="is-size-1 mb-4 has-text-weight-extrabold">내 옷장</p>
+        </div>
+
+        <div class="level-right">
+            <label for="logout">{{user}}님으로 로그인됨</label>
+            <button class="button is-danger" id="logout" onclick="proceedLogout()">로그아웃</button>
+        </div>
+    </div>
+    <hr />
+    <div class="field is-grouped mb-3" style="overflow-x: auto">
+        <button id="type-all" class="button is-primary">전체</button>
+        <button id="type-upper" class="button">상의</button>
+        <button id="type-lower" class="button">하의</button>
+        <button id="type-outer" class="button">외투</button>
+        <button id="type-shoes" class="button">신발</button>
+        <button id="type-acces" class="button">악세서리</button>
+    </div>
+    <div id="closets-grid" class="fixed-grid has-2-cols">
+        <div class="grid">
+            <!-- 여기서 Jinja 템플릿이 제대로 쓰이게 되네요 -->
+            {% for item in items %}
+            <div class="cell">
+                <div class="box">
+                    <img src="{{ item['image_url'] }}">
+                    <hr />
+                    <p class="is-size-3 has-text-weight-bold mb-3">
+                        {{ item['name'] }}
+                    </p>
+                    <p class="mb-3">
+                        {{ item['type'] }}
+                    </p>
+                    <p class="mb-3">
+                        {{ item['price'] }}원, 착용 횟수: {{ item['wear_count'] }}회
+                    </p>
+                    <a href="#"><u>상세정보 보러가기</u></a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<script src="{{ url_for('static', filename='js/closet.js') }}"></script>
 {% endblock %}

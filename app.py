@@ -13,7 +13,6 @@ app.register_blueprint(auth_bp, url_prefix="/auth")
 app.register_blueprint(closet_bp, url_prefix="/closet")
 app.register_blueprint(mypage_bp, url_prefix="/mypage")
 
-
 @app.route("/")
 def index():
     #로그인 유무에 따라 화면 이동

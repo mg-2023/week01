@@ -1,0 +1,139 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="box m-5">
+    <div class="level">
+        <div class="level-left">
+            <p class="is-size-1 mb-4 has-text-weight-extrabold">옷장 상세</p>
+        </div>
+
+        <div class="level-right">
+            <label for="logout">{{user}}님으로 로그인됨</label>
+            <button class="button is-danger" id="logout" onclick="proceedLogout()">
+                로그아웃
+            </button>
+        </div>
+    </div>
+    <hr />
+
+    <div class="columns is-vcentered">
+        <div class="column is-5">
+            <div class="card">
+                <div class="card-image">
+                    <figure class="image is-4by3">
+                        <img src="{{ item.image_url }}" alt="옷 이미지" />
+                    </figure>
+                </div>
+            </div>
+        </div>
+
+        <div class="column is-7">
+            <div class="card">
+                <div class="card-header">
+                    <p class="card-header-title">옷 상세 정보</p>
+                </div>
+            </div>
+            <div class="card-content">
+                <form id="detail-form">
+                    <table class="table is-fullwidth">
+                        <tbody>
+                            <tr>
+                                <th>상품명</th>
+                                <td>
+                                    <span class="view-mode">{{ item.name }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="name"
+                                        value="{{ item.name }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>브랜드</th>
+                                <td>
+                                    <span class="view-mode">{{ item.brand }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="brand"
+                                        value="{{ item.brand }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>종류</th>
+                                <td>
+                                    <span class="view-mode">{{ item.type }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="type"
+                                        value="{{ item.type }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>사이즈</th>
+                                <td>
+                                    <span class="view-mode">{{ item.size }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="size"
+                                        value="{{ item.size }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>시즌</th>
+                                <td>
+                                    <span class="view-mode">{{ item.season }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="season"
+                                        value="{{ item.season }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>구매날짜</th>
+                                <td>
+                                    <span class="view-mode">{{ item.buy_date }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="buy_date"
+                                        value="{{ item.buy_date }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>가격</th>
+                                <td>
+                                    <span class="view-mode">{{ item.price }}원</span>
+                                    <input class="input is-small edit-mode is-hidden" type="number" name="price"
+                                        value="{{ item.price }}">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>구매처</th>
+                                <td>
+                                    <span class="view-mode">{{ item.buy_method }}</span>
+                                    <input class="input is-small edit-mode is-hidden" type="text" name="buy_method"
+                                        value="{{ item.buy_method }}">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+
+                <div class="field is-grouped">
+                    <p class="control">
+                        <button class="button is-primary">
+                            착용횟수: {{ item.wear_count }}회
+                        </button>
+                    </p>
+                    <p class="control">
+                        <button class="button is-success">
+                            오늘 입었어요 (+1)
+                        </button>
+                    </p>
+                </div>
+
+                <div class="buttons view-mode">
+                    <button class="button is-warning" onclick="toggleEditMode(true)">수정</button>
+                    <button class="button is-danger" onclick="deleteItem('{{ item._id }}')">삭제</button>
+                    <button class="button is-success" onclick="toggleLifeFit('{{ item._id }}')">인생핏 등록</button>
+                </div>
+
+                <div class="buttons edit-mode is-hidden">
+                    <button class="button is-success" onclick="saveChanges('{{ item._id }}')">저장</button>
+                    <button class="button is-light" onclick="toggleEditMode(false)">취소</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+{% endblock %}
