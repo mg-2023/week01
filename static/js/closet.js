@@ -1,14 +1,14 @@
-function register() {
-    let brand = $("#brand").val();
-    let name = $("#name").val();
-    let fileInput = $("#clothpic")[0];
-    let file = fileInput.files[0];
-    let buydate = $("#buydate").val();
-    let buymethod = $("#buymethod").val();
-    let price = $("#price").val();
-    let season = $("#season").val();
-    let clothtype = $("#clothtype").val();
-    let clothsize = $("#clothsize").val();
+    function register() {
+        let brand = $("#brand").val();
+        let name = $("#name").val();
+        let fileInput = $("#clothpic")[0];
+        let file = fileInput.files[0];
+        let buydate = $("#buydate").val();
+        let buymethod = $("#buymethod").val();
+        let price = $("#price").val();
+        let season = $("#season").val();
+        let clothtype = $("#clothtype").val();
+        let clothsize = $("#clothsize").val();
 
     // 예외 처리
     if (!file) {
