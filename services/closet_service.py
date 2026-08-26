@@ -31,13 +31,16 @@ def create_closet_item(user_id, form_data, file):
     item_doc = {
         "user_id": user_id,
         "image_url": image_url,
+        "name": form_data.get("name"),
         "brand": form_data.get("brand"),
         "buy_date": form_data.get("date"),
         "buy_method": form_data.get("method"),
         "price": int(form_data.get("price")) if form_data.get("price") else 0,
         "season": form_data.get("season"),
         "type": form_data.get("type"),
-        "size": form_data.get("size")
+        "size": form_data.get("size"),
+        "wear_count": 0,
+        "is_life_fit": False,
     }
 
     result = items.insert_one(item_doc)
