@@ -1,7 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
 <div class="box m-5">
-    <p class="is-size-1 has-text-weight-extrabold">마이페이지</p>
+    <div class="level">
+        <div class="level-left">
+            <p class="is-size-1 mb-4 has-text-weight-extrabold">마이페이지</p>
+        </div>
+
+        <div class="level-right">
+            <label for="logout">{{user}}님으로 로그인됨</label>
+            <button class="button is-danger" id="logout" onclick="proceedLogout()">로그아웃</button>
+        </div>
+    </div>
     <hr />
     <div class="fixed-grid has-2-cols has-1-cols-mobile">
         <div class="grid has-text-centered">

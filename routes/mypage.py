@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
 
 mypage_bp = Blueprint("mypage", __name__)
 
 @mypage_bp.route("/")
 def mypage():
-    return render_template('mypage/index.html')
+    user = session['user_id']
+    return render_template('mypage/index.html', user=user)
