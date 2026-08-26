@@ -1,5 +1,6 @@
     function register() {
         let brand = $("#brand").val();
+        let name = $("#name").val();
         let fileInput = $("#clothpic")[0];
         let file = fileInput.files[0];
         let buydate = $("#buydate").val();
@@ -17,6 +18,7 @@
 
         let formData = new FormData();
         formData.append("file", file);
+        formData.append("name", name);
         formData.append("brand", brand);
         formData.append("date", buydate);
         formData.append("method", buymethod);

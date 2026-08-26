@@ -9,11 +9,6 @@ def index():
     return render_template('closet/index.html')
 
 
-# 등록 화면
-@closet_bp.route("/register", methods=["GET"])
-def register_page():
-    return render_template("closet/register.html")
-
 # 등록 API
 @closet_bp.route("/register", methods=["GET", "POST"])
 def register_item():
@@ -34,4 +29,4 @@ def register_item():
         except Exception as e:
             return jsonify({"message": f"등록 실패: {str(e)}"}), 500
 
-    return render_template("register.html")
+    return render_template("closet/register.html")
