@@ -1,7 +1,7 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 mypage_bp = Blueprint("mypage", __name__)
 
-@mypage_bp.route("/mypage")
+@mypage_bp.route("/")
 def mypage():
-    return "마이페이지"
+    return render_template('mypage/index.html')
